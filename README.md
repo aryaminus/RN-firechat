@@ -1,8 +1,8 @@
-# RNSignInUpscreen
+# RnFireChat
 
-**RNSignInUpscreen** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
+**RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-[![RNSignInUpscreen demo](https://i.imgur.com/vgep2fb.gif)]()
+[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
 
 **Note:**
 
