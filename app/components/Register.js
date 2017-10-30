@@ -12,6 +12,8 @@ import {
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
+import firebase from "react-native-firebase";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default class Register extends Component {
   constructor(props) {
@@ -20,8 +22,19 @@ export default class Register extends Component {
       email: "",
       name: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      errors: "",
+      showProgress: false,
+      loading: false
     };
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate("Boiler");
+        this.setState({
+          loading: false
+        });
+      }
+    });
   }
 
   static navigationOptions = {
@@ -32,10 +45,22 @@ export default class Register extends Component {
   };
 
   async onRegisterPress() {
+    this.setState({ error: "", loading: true });
     const { email, password, name } = this.state;
     console.log(email);
     console.log(name);
     console.log(password);
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ error: "", loading: false });
+      })
+      .catch(() => {
+        this.setState({ error: "Authentication failed.", loading: false });
+      });
+
     await AsyncStorage.setItem("email", email);
     await AsyncStorage.setItem("name", name);
     await AsyncStorage.setItem("password", password);
@@ -45,6 +70,7 @@ export default class Register extends Component {
   render() {
     return (
       <View behavior="padding" style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#16a085" />
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={require("./banana.png")} />
           <Text style={styles.subtext}>Sign Up:</Text>
@@ -86,7 +112,8 @@ export default class Register extends Component {
           />
           <TextInput
             value={this.state.password}
-            onChangeText={password_confirmation => this.setState({ password_confirmation })}
+            onChangeText={password_confirmation =>
+              this.setState({ password_confirmation })}
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
@@ -102,6 +129,8 @@ export default class Register extends Component {
         >
           <Text style={styles.buttonText}>Register</Text>
         </TouchableHighlight>
+        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+        <Spinner visible={this.state.loading} />
       </View>
     );
   }
@@ -157,6 +186,12 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
     marginTop: 20
+  },
+  errorTextStyle: {
+    color: "#E64A19",
+    alignSelf: "center",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 
