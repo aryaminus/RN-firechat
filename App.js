@@ -52,19 +52,9 @@ class Home extends Component<{}> {
   render() {
     if (this.state.loading) return null; // Render loading/splash screen etc
     if (!this.state.authenticated) {
-      return (
-        <View>
-          <StatusBar barStyle="light-content" backgroundColor="#16a085" />
-          <Login navigation={this.props.navigation} />
-        </View>
-      );
+      return <Login navigation={this.props.navigation} />;
     }
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#16a085" />
-        <Boiler navigation={this.props.navigation} />
-      </View>
-    );
+    return <Boiler navigation={this.props.navigation} />;
   }
 }
 
@@ -101,8 +91,4 @@ export default (App = StackNavigator({
   }
 }));
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
+const styles = StyleSheet.create({});
