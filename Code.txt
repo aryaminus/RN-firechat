@@ -1,0 +1,118 @@
+react-native init RNintroscreen
+cd RNintroscreen
+npm install
+
+Package:
+https://reactnavigation.org/docs/intro/
+https://github.com/joinspontaneous/react-native-loading-spinner-overlay
+https://github.com/invertase/react-native-firebase/
+
+npm install --save react-navigation
+npm install --save react-native-loading-spinner-overlay@latest
+npm install --save react-native-firebase
+
+react-native link
+react-native link react-native-firebase
+
+Usage:
+import { StackNavigator } from "react-navigation";
+
+and
+
+return (
+          <View>
+            <Boiler navigation={this.props.navigation} />
+          </View>
+);
+
+and
+
+const app = StackNavigator({
+  Boiler: {
+    screen: HomeScreen,
+    navigationOptions: {
+      title: "Boiler"
+    }
+  }
+});
+
+Usage spinner:
+import Spinner from "react-native-loading-spinner-overlay";
+
+    this.state = {
+      loading: false
+    };
+
+<Spinner visible={this.state.loading} />
+
+when need to show spinner: this.setState({ loading: true });
+when need to hide spinner: this.setState({ loading: false });
+
+Usage Firebase:
+place this file in the root of your project at android/app/google-services.json
+
+in android/build.gradle:
+
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+        // -------------------------------------------------
+        // Add this below the existing maven property above
+        // -------------------------------------------------
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
+}
+
+buildscript {
+  // ...
+  dependencies {
+    // ...
+    classpath 'com.google.gms:google-services:3.1.1'
+  }
+}
+
+in android/app/build.gradle :
+
+dependencies {
+  // This should be here already
+  compile(project(':react-native-firebase')) {
+    transitive = false
+  }
+
+  // Firebase dependencies
+  compile "com.google.android.gms:play-services-base:11.4.2"
+  compile "com.google.firebase:firebase-core:11.4.2"
+  compile "com.google.firebase:firebase-auth:11.4.2"
+
+add in bottom:
+apply plugin: 'com.google.gms.google-services'
+
+In android/app/src/main/java/com/[app name]/MainApplication.java:
+// ...
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage; // <-- Add this line
+
+public class MainApplication extends Application implements ReactApplication {
+    // ...
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new RNFirebasePackage(),
+          new RNFirebaseAuthPackage() // <-- Add this line
+      );
+    }
+  };
+  // ...
+}
+
+
+
