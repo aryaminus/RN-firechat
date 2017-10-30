@@ -24,17 +24,27 @@ export default class Register extends Component {
       password: "",
       password_confirmation: "",
       errors: "",
-      showProgress: false,
       loading: false
     };
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        this.getRef()
+        .child("friends")
+        .push({
+          email: user.email,
+          uid: user.uid,
+          name: this.state.name
+        });
         this.props.navigation.navigate("Boiler");
         this.setState({
           loading: false
         });
       }
     });
+  }
+
+  getRef() {
+    return firebase.database().ref();
   }
 
   static navigationOptions = {

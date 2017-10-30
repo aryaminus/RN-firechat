@@ -24,7 +24,6 @@ import firebase from "react-native-firebase";
 class Home extends Component<{}> {
   constructor() {
     super();
-    VoxImplant.SDK.closeConnection();
     this.state = {
       page: "connection",
       loading: true,
@@ -41,13 +40,6 @@ class Home extends Component<{}> {
   };
 
   componentDidMount() {
-    firebase
-      .messaging()
-      .getToken()
-      .then(token => {
-        console.warn("Device firebase Token: ", token);
-        this.setState((token = token));
-      });
     firebase.auth().onAuthStateChanged(user => {
       firebase
         .messaging()
@@ -73,22 +65,28 @@ class Home extends Component<{}> {
         this.setState({ loading: false, authenticated: false });
       }
     });
-    // do stuff while splash screen is shown
-    // After having done stuff (such as async tasks) hide the splash screen
-    SplashScreen.hide();
   }
 
   render() {
+    if (this.state.loading) return null; // Render loading/splash screen etc
+    if (!this.state.authenticated) {
+      return (
+        <View>
+          <StatusBar barStyle="light-content" backgroundColor="#16a085" />
+          <Login navigation={this.props.navigation} />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#16a085" />
-        <Login navigation={this.props.navigation} />
+        <Boiler navigation={this.props.navigation} />
       </View>
     );
   }
 }
 
-export default App = StackNavigator({
+export default (App = StackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
@@ -119,7 +117,7 @@ export default App = StackNavigator({
       title: "Boiler"
     }
   }
-});
+}));
 
 const styles = StyleSheet.create({
   container: {
