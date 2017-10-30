@@ -12,16 +12,28 @@ import {
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
-//import Spinner from "react-native-loading-spinner-overlay";
+import Spinner from "react-native-loading-spinner-overlay";
+import firebase from "react-native-firebase";
 
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      loading: false,
+      error: ""
     };
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate("Boiler");
+        this.setState({
+          loading: false
+        });
+      }
+    });
   }
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: "#16a085",
@@ -29,13 +41,23 @@ export default class Login extends Component {
     },
     header: null
   };
+
   async onLoginPress() {
+    this.setState({ error: "", loading: true });
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        this.setState({ error: "", loading: false });
+      })
+      .catch(() => {
+        this.setState({ error: "Authentication failed.", loading: false });
+      });
     await AsyncStorage.setItem("email", email);
     await AsyncStorage.setItem("password", password);
-    this.props.navigation.navigate("Boiler");
   }
   render() {
     return (
@@ -93,6 +115,8 @@ export default class Login extends Component {
             Forget Password
           </Text>
         </TouchableOpacity>
+        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+        <Spinner visible={this.state.loading} />
       </View>
     );
   }
@@ -120,7 +144,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     opacity: 0.8
   },
-  keyboard:{
+  keyboard: {
     margin: 20,
     padding: 20,
     alignSelf: "stretch"
@@ -137,6 +161,12 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#27ae60",
     paddingVertical: 15
+  },
+  errorTextStyle: {
+    color: "#E64A19",
+    alignSelf: "center",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 
