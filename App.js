@@ -4,14 +4,8 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar
-} from 'react-native';
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View, StatusBar } from "react-native";
 
 import Login from "./app/components/Login";
 import Boiler from "./app/components/Boiler";
@@ -19,7 +13,7 @@ import ForgetPassword from "./app/components/ForgetPassword";
 import Register from "./app/components/Register";
 
 import { StackNavigator } from "react-navigation";
-
+import firebase from "react-native-firebase";
 /*const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -28,6 +22,16 @@ import { StackNavigator } from "react-navigation";
 });*/
 
 class Home extends Component<{}> {
+  constructor() {
+    super();
+    VoxImplant.SDK.closeConnection();
+    this.state = {
+      page: "connection",
+      loading: true,
+      authenticated: false
+    };
+  }
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: "#16a085",
@@ -35,6 +39,45 @@ class Home extends Component<{}> {
     },
     header: null
   };
+
+  componentDidMount() {
+    firebase
+      .messaging()
+      .getToken()
+      .then(token => {
+        console.warn("Device firebase Token: ", token);
+        this.setState((token = token));
+      });
+    firebase.auth().onAuthStateChanged(user => {
+      firebase
+        .messaging()
+        .on(firebase.messaging().Notification, async notif => {
+          if (notif.opened_from_tray) {
+            //nid has been sent in the data payload of the notification
+            const nid = notif.nid;
+            AppRouter.notifications(nid);
+          }
+          if (Platform.OS === "ios") {
+            // Usual shenanigans goes here (see fcm starting example)
+          }
+        });
+      if (user) {
+        firebase.messaging().requestPermissions();
+        this.topic = `/topics/${user.uid}`;
+        firebase.messaging().subscribeToTopic(this.topic);
+        this.setState({ loading: false, authenticated: true });
+      } else if (this.topic) {
+        // If the user is logged-out, we unsubscribe
+        firebase.messaging().unsubscribeFromTopic(this.topic);
+      } else {
+        this.setState({ loading: false, authenticated: false });
+      }
+    });
+    // do stuff while splash screen is shown
+    // After having done stuff (such as async tasks) hide the splash screen
+    SplashScreen.hide();
+  }
+
   render() {
     return (
       <View style={styles.container}>
