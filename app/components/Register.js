@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TextInput,
+  StatusBar,
   TouchableHighlight,
   Image,
   KeyboardAvoidingView,

@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Image,
+  StatusBar,
   TextInput,
   StyleSheet, // CSS-like styles
   Text, // Renders text
