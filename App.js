@@ -41,26 +41,8 @@ class Home extends Component<{}> {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      firebase
-        .messaging()
-        .on(firebase.messaging().Notification, async notif => {
-          if (notif.opened_from_tray) {
-            //nid has been sent in the data payload of the notification
-            const nid = notif.nid;
-            AppRouter.notifications(nid);
-          }
-          if (Platform.OS === "ios") {
-            // Usual shenanigans goes here (see fcm starting example)
-          }
-        });
       if (user) {
-        firebase.messaging().requestPermissions();
-        this.topic = `/topics/${user.uid}`;
-        firebase.messaging().subscribeToTopic(this.topic);
         this.setState({ loading: false, authenticated: true });
-      } else if (this.topic) {
-        // If the user is logged-out, we unsubscribe
-        firebase.messaging().unsubscribeFromTopic(this.topic);
       } else {
         this.setState({ loading: false, authenticated: false });
       }
