@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Text, View, StyleSheet } from "react-native";
-import Backend from "../Backend";
+
+import Backend from "./Backend";
+
 import { GiftedChat } from "react-native-gifted-chat";
-class Chat extends React.Component {
+
+class GloChat extends React.Component {
   constructor(props){
     super(props);
     this.state = { name: false };
@@ -42,12 +45,6 @@ class Chat extends React.Component {
     Backend.closeChat();
   }
 }
-Chat.defaultProps = {
-  name: ""
-};
-Chat.prototypes = {
-  name: React.PropTypes.string
-};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -55,4 +52,4 @@ const styles = StyleSheet.create({
     backgroundColor: "gray"
   }
 });
-export default Chat;
+export default GloChat;

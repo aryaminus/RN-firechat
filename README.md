@@ -2,6 +2,8 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
+In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/signInUp" target="_blank">SignInUp</a> branch where we will be working to entering a chatroom.
+
 [![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
 
 **Note:**
@@ -52,12 +54,10 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of RN-login-register-screen
+ - Use the template of SignInUp branch
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
- - Setup up new firebase project and Add app for your OS and put google-services.json in /android/app
- - Put up auth with signin for login and auth with createUser for register
- - Using onAuthChange navigate to Boiler 
- - For autologin, use onauth and if user is found navigate to boiler else go to Login.js
+ - InputField to enter username if the user wants to be anynomous to the system and then navigate to GloChat.js
+ - Setup Backend.js to make database as 'messages' with loading of previos mesages from server and gifted chat to show to the user for message input
 
 ![Working demo]()
 

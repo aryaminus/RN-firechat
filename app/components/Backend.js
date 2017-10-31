@@ -1,4 +1,5 @@
 import firebase from "react-native-firebase";
+
 class Backend {
   uid = "";
   messagesRef = null;

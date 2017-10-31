@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
 //import { StackNavigator } from "react-navigation";
 export default class Boiler extends Component {
   state = {
@@ -30,7 +38,10 @@ export default class Boiler extends Component {
         <TouchableOpacity>
           <Text
             style={styles.buttonStyle}
-            onPress={() => this.props.navigation.navigate("GloChat", {name: this.state.name} )}
+            onPress={() =>
+              this.props.navigation.navigate("GloChat", {
+                name: this.state.name
+              })}
           >
             Chat Room
           </Text>
