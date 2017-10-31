@@ -17,8 +17,8 @@ In this branch, we'll be using the built layout from <a href="https://github.com
 Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
-$ cd RN-login-register-screen
-$ git checkout signInUp
+$ cd RN-firechat
+$ git checkout GloChat
 ```
 
 **Start the application in development mode**
