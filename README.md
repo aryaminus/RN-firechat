@@ -2,6 +2,9 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
+In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her
+
+
 [![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
 
 **Note:**
@@ -15,8 +18,8 @@
 Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
-$ cd RN-login-register-screen
-$ git checkout signInUp
+$ cd RN-firechat
+$ git PersonalChat
 ```
 
 **Start the application in development mode**
@@ -52,12 +55,10 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of RN-login-register-screen
+ - Use the template of SignInUp branch
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
- - Setup up new firebase project and Add app for your OS and put google-services.json in /android/app
- - Put up auth with signin for login and auth with createUser for register
- - Using onAuthChange navigate to Boiler 
- - For autologin, use onauth and if user is found navigate to boiler else go to Login.js
+ - If choose Friendlist.js show a vertical ListView of users linked in 'friends' with geeting progile pic from gavatar
+ - When certain user is clicked, send the rowdata value ie receiver ID and genetare certain Chat ID with user and Friend ID and iside the databse of chatID, show the Gifted Chat to send and receive text
 
 ![Working demo]()
 

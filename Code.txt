@@ -1,5 +1,5 @@
-react-native init RNintroscreen
-cd RNintroscreen
+react-native init RN-firechat
+cd RN-firechat
 npm install
 
 Package:
@@ -92,6 +92,7 @@ dependencies {
   compile "com.google.android.gms:play-services-base:11.4.2"
   compile "com.google.firebase:firebase-core:11.4.2"
   compile "com.google.firebase:firebase-auth:11.4.2"
+  compile "com.google.firebase:firebase-database:11.4.2"
 
 add in bottom:
 apply plugin: 'com.google.gms.google-services'
@@ -99,7 +100,8 @@ apply plugin: 'com.google.gms.google-services'
 In android/app/src/main/java/com/[app name]/MainApplication.java:
 // ...
 import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.auth.RNFirebaseAuthPackage; // <-- Add this line
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage; 
 
 public class MainApplication extends Application implements ReactApplication {
     // ...
@@ -109,7 +111,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNFirebasePackage(),
-          new RNFirebaseAuthPackage() // <-- Add this line
+          new RNFirebaseAuthPackage(),
+          new RNFirebaseDatabasePackage()
       );
     }
   };
