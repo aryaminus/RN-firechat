@@ -55,7 +55,7 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of SignInUp branch
+ - Use the template of GloChat branch
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
  - If choose Friendlist.js show a vertical ListView of users linked in 'friends' with geeting progile pic from gavatar
  - When certain user is clicked, send the rowdata value ie receiver ID and genetare certain Chat ID with user and Friend ID and iside the databse of chatID, show the Gifted Chat to send and receive text
