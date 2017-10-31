@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
-//import { StackNavigator } from "react-navigation";
+import { StackNavigator } from "react-navigation";
 export default class Boiler extends Component {
   state = {
     name: ""
@@ -10,6 +10,28 @@ export default class Boiler extends Component {
       backgroundColor: "#16a085",
       elevation: null
     },
+    headerRight: (
+      <Button
+        primary
+        title="Logout"
+        //style={styles.rightButton}
+        onPress={() => {
+          firebase
+            .auth()
+            .signOut()
+            .then(
+              () => {
+                this.props.navigation.navigate("Login");
+              },
+              function(error) {
+                // An error happened.
+              }
+            );
+        }}
+      >
+        Log out
+      </Button>
+    ),
     headerLeft: null
   };
   render() {
@@ -30,19 +52,22 @@ export default class Boiler extends Component {
         <TouchableOpacity>
           <Text
             style={styles.buttonStyle}
-            onPress={() => this.props.navigation.navigate("GloChat", {name: this.state.name} )}
+            onPress={() =>
+              this.props.navigation.navigate("GloChat", {
+                name: this.state.name
+              })}
           >
             Chat Room
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-        <Text
-          style={styles.buttonStyle}
-          onPress={() => this.props.navigation.navigate("Friendlist")}
-        >
-          Friend List
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={styles.buttonStyle}
+            onPress={() => this.props.navigation.navigate("Friendlist")}
+          >
+            Friend List
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
