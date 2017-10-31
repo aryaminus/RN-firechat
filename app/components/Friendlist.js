@@ -14,7 +14,7 @@ import { StackNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 
-import md5 from "../../lib/md5";
+import md5 from "./md5";
 import Chat from "./Chat";
 
 export default class FriendsList extends Component {

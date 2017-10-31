@@ -10,18 +10,13 @@ import { Platform, StyleSheet, Text, View, StatusBar } from "react-native";
 import Login from "./app/components/Login";
 import Boiler from "./app/components/Boiler";
 import Friendlist from "./app/components/Friendlist";
-import GloChat from "./app/components/GloChat";
+import Chat from "./app/components/Friendlist";
+import GloChat from "./app/components/Chat";
 import ForgetPassword from "./app/components/ForgetPassword";
 import Register from "./app/components/Register";
 
 import { StackNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
-/*const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});*/
 
 class Home extends Component<{}> {
   constructor() {
@@ -101,6 +96,12 @@ export default (App = StackNavigator({
     screen: Friendlist,
     navigationOptions: {
       title: "Friendlist"
+    }
+  },
+  Chat: {
+    screen: Chat,
+    navigationOptions: {
+      title: "Chat"
     }
   }
 }));
