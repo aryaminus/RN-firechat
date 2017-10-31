@@ -9,7 +9,6 @@ import { Platform, StyleSheet, Text, View, StatusBar } from "react-native";
 
 import Login from "./app/components/Login";
 import Boiler from "./app/components/Boiler";
-import Friendlist from "./app/components/Friendlist";
 import GloChat from "./app/components/GloChat";
 import ForgetPassword from "./app/components/ForgetPassword";
 import Register from "./app/components/Register";
@@ -95,12 +94,6 @@ export default (App = StackNavigator({
     screen: GloChat,
     navigationOptions: {
       title: "GloChat"
-    }
-  },
-  Friendlist: {
-    screen: Friendlist,
-    navigationOptions: {
-      title: "Friendlist"
     }
   }
 }));

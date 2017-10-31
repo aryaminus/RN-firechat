@@ -35,14 +35,6 @@ export default class Boiler extends Component {
             Chat Room
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-        <Text
-          style={styles.buttonStyle}
-          onPress={() => this.props.navigation.navigate("Friendlist")}
-        >
-          Friend List
-        </Text>
-      </TouchableOpacity>
       </View>
     );
   }
