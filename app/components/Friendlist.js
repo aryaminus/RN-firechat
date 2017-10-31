@@ -9,13 +9,13 @@ import {
   Button,
   TextInput
 } from "react-native";
+
+import { StackNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
+
 import md5 from "../../lib/md5";
 import Chat from "./Chat";
-import { StackNavigator } from "react-navigation";
-
-var navigator;
 
 export default class FriendsList extends Component {
   constructor(props) {
@@ -25,12 +25,8 @@ export default class FriendsList extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
       loading: true
-      //friend: ""
     };
     this.friendsRef = this.getRef().child("friends");
-
-    navigator = this.props.navigator;
-    //friend: this.props.friend;
   }
 
   getRef() {
@@ -70,31 +66,11 @@ export default class FriendsList extends Component {
     }
   };
 
-  onIdpress() {
-    this.props.friend = rowData;
-    this.props.navigation.navigate("Chat");
-  }
-
   renderRow = rowData => {
     return (
       <TouchableOpacity
-        onPress={(props) =>
-          //this.onIdpress.bind(this)
-          //this.props.navigation.navigate("ChatF", { friend: rowData })
-          {
-            Actions.chatF(
-              {
-                /*name: rowData.name,
-                uid: rowData.uid,
-                email: rowData.email*/
-                friend: rowData
-              },
-              //{ friend: rowData }
-              /*friend.name = rowData.name,
-              friend.uid = rowData.uid,
-              friend.email = rowData.email     */
-            );
-          }}
+        onPress={props =>
+          this.props.navigation.navigate("Chat", { friend: rowData })}
       >
         <View style={styles.profileContainer}>
           <Image
@@ -114,9 +90,6 @@ export default class FriendsList extends Component {
       <View style={styles.container}>
         <View style={styles.topGroup}>
           <Text style={styles.myFriends}>My Friends</Text>
-          <TouchableOpacity>
-            <Text style={styles.inviteFriends}>Invite More Freinds</Text>
-          </TouchableOpacity>
         </View>
         <ListView
           dataSource={this.state.dataSource}
@@ -127,7 +100,6 @@ export default class FriendsList extends Component {
     );
   }
 }
-//ChatF.router = FriendsList.router;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -152,13 +124,6 @@ const styles = StyleSheet.create({
     //secondaryColor: '#E9E9E9',
     //grayColor: '#A5A5A5',
     fontSize: 16,
-    padding: 5
-  },
-  inviteFriends: {
-    color: "#3A5BB1",
-    tintColor: "#fff",
-    //secondaryColor: '#E9E9E9',
-    //grayColor: '#A5A5A5',
     padding: 5
   },
   profileContainer: {
