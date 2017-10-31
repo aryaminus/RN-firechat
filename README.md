@@ -41,7 +41,8 @@ We will be using Signin and Signup screen ie. <a href="https://github.com/aryami
 1. <a href="https://reactnavigation.org/docs/intro/" target="_blank">react-navigation</a>
 2. <a href="https://github.com/joinspontaneous/react-native-loading-spinner-overlay" target="_blank">react-native-loading-spinner-overlay</a>
 3. <a href="https://github.com/invertase/react-native-firebase/" target="_blank">react-native-firebase</a>
-4. <a href="https://rnfirebase.io/docs/v3.0.*/installation/initial-setup" target="_blank">Invertase Firebase initial setup</a>
+4. <a href="https://github.com/FaridSafi/react-native-gifted-chat" target="_blank">react-native-gifted-chat</a>
+5. <a href="https://rnfirebase.io/docs/v3.0.*/installation/initial-setup" target="_blank">Invertase Firebase initial setup</a>
 
 ## Additional Links:
 There is an update put up by <a href="https://rnfirebase.io/" target="_blank">invertase</a> for a <a href="https://github.com/invertase/react-native-firebase-starter" target="_blank">react-native-firebase-starter</a> pre-integrated so you can get started quickly.

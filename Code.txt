@@ -6,10 +6,12 @@ Package:
 https://reactnavigation.org/docs/intro/
 https://github.com/joinspontaneous/react-native-loading-spinner-overlay
 https://github.com/invertase/react-native-firebase/
+https://github.com/FaridSafi/react-native-gifted-chat
 
 npm install --save react-navigation
 npm install --save react-native-loading-spinner-overlay@latest
 npm install --save react-native-firebase
+npm install react-native-gifted-chat --save
 
 react-native link
 react-native link react-native-firebase
