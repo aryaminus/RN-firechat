@@ -23,7 +23,7 @@ export default class Login extends Component {
       email: "",
       password: "",
       loading: false,
-      error: ""
+      errorMessage: null
     };
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -44,7 +44,7 @@ export default class Login extends Component {
   };
 
   async onLoginPress() {
-    this.setState({ error: "", loading: true });
+    this.setState({ errorMessage: null, loading: true });
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
@@ -52,14 +52,25 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        this.setState({ error: "", loading: false });
+        this.setState({ loading: false });
       })
-      .catch(() => {
-        this.setState({ error: "Authentication failed.", loading: false });
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({
+          errorMessage,
+          loading: false
+        });
       });
     await AsyncStorage.setItem("email", email);
     await AsyncStorage.setItem("password", password);
   }
+
+  renderErrorMessage = () => {
+    if (this.state.errorMessage)
+      return <Text style={styles.error}>{this.state.errorMessage}</Text>;
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -117,7 +128,7 @@ export default class Login extends Component {
             Forget Password
           </Text>
         </TouchableOpacity>
-        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+        {this.renderErrorMessage()}
         <Spinner visible={this.state.loading} />
       </View>
     );
@@ -164,11 +175,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#27ae60",
     paddingVertical: 15
   },
-  errorTextStyle: {
-    color: "#E64A19",
-    alignSelf: "center",
-    paddingTop: 10,
-    paddingBottom: 10
+  error: {
+    margin: 8,
+    marginBottom: 0,
+    color: "red",
+    textAlign: "center"
   }
 });
 
