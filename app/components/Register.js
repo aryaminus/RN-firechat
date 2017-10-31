@@ -24,17 +24,28 @@ export default class Register extends Component {
       name: "",
       password: "",
       password_confirmation: "",
-      errors: "",
+      errorMessage: null,
       loading: false
     };
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        this.getRef()
+          .child("friends")
+          .push({
+            email: user.email,
+            uid: user.uid,
+            name: this.state.name
+          });
         this.props.navigation.navigate("Boiler");
         this.setState({
           loading: false
         });
       }
     });
+  }
+
+  getRef() {
+    return firebase.database().ref();
   }
 
   static navigationOptions = {
@@ -45,7 +56,7 @@ export default class Register extends Component {
   };
 
   async onRegisterPress() {
-    this.setState({ error: "", loading: true });
+    this.setState({ errorMessage: null, loading: true });
     const { email, password, name } = this.state;
     console.log(email);
     console.log(name);
@@ -55,10 +66,12 @@ export default class Register extends Component {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState({ error: "", loading: false });
+        this.setState({ loading: false });
       })
-      .catch(() => {
-        this.setState({ error: "Authentication failed.", loading: false });
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({ errorMessage, loading: false });
       });
 
     await AsyncStorage.setItem("email", email);
@@ -66,6 +79,11 @@ export default class Register extends Component {
     await AsyncStorage.setItem("password", password);
     this.props.navigation.navigate("Boiler");
   }
+
+  renderErrorMessage = () => {
+    if (this.state.errorMessage)
+      return <Text style={styles.error}>{this.state.errorMessage}</Text>;
+  };
 
   render() {
     return (
@@ -129,7 +147,7 @@ export default class Register extends Component {
         >
           <Text style={styles.buttonText}>Register</Text>
         </TouchableHighlight>
-        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+        {this.renderErrorMessage()}
         <Spinner visible={this.state.loading} />
       </View>
     );
@@ -187,11 +205,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 20
   },
-  errorTextStyle: {
-    color: "#E64A19",
-    alignSelf: "center",
-    paddingTop: 10,
-    paddingBottom: 10
+  error: {
+    margin: 8,
+    marginBottom: 0,
+    color: "red",
+    textAlign: "center"
   }
 });
 
