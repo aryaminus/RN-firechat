@@ -6,7 +6,8 @@ import {
   View,
   Button,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from "react-native";
 
 export default class ForgetPassword extends Component {
@@ -15,6 +16,8 @@ export default class ForgetPassword extends Component {
     this.state = {
       email: "",
       password: "",
+      errorMessage: null,
+      loading: false
     };
   }
   static navigationOptions = {
@@ -25,11 +28,34 @@ export default class ForgetPassword extends Component {
   };
 
   onForgetPress() {
+    this.setState({ errorMessage: null, loading: true });
+    const { email } = this.state;
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        this.setState({ loading: false });
         this.props.navigation.navigate("Login");
+      })
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({
+          errorMessage,
+          loading: false
+        });
+      });
   }
+
+  renderErrorMessage = () => {
+    if (this.state.errorMessage)
+      return <Text style={styles.error}>{this.state.errorMessage}</Text>;
+  };
+
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#16a085" />
         <TextInput
           placeholder="Username"
           placeholderTextColor="rgba(255,255,255,0.7)"
@@ -46,6 +72,8 @@ export default class ForgetPassword extends Component {
         >
           <Text style={styles.buttonText}>Forget Password</Text>
         </TouchableOpacity>
+        {this.renderErrorMessage()}
+        <Spinner visible={this.state.loading} />
       </View>
     );
   }
@@ -74,5 +102,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFF",
     fontWeight: "700"
-  },
+  }
 });
