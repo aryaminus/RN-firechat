@@ -1,37 +1,26 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  StatusBar,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
+
 import { StackNavigator } from "react-navigation";
+import firebase from "react-native-firebase";
+
 export default class Boiler extends Component {
   state = {
     name: ""
   };
   static navigationOptions = {
     headerStyle: {
-      backgroundColor: "#16a085",
-      elevation: null
+      backgroundColor: "#16a085"
     },
-    headerRight: (
-      <Button
-        primary
-        title="Logout"
-        //style={styles.rightButton}
-        onPress={() => {
-          firebase
-            .auth()
-            .signOut()
-            .then(
-              () => {
-                this.props.navigation.navigate("Login");
-              },
-              function(error) {
-                // An error happened.
-              }
-            );
-        }}
-      >
-        Log out
-      </Button>
-    ),
     headerLeft: null
   };
   render() {
@@ -68,6 +57,26 @@ export default class Boiler extends Component {
             Friend List
           </Text>
         </TouchableOpacity>
+        <Button
+          primary
+          title="Logout"
+          //style={styles.rightButton}
+          onPress={() => {
+            firebase
+              .auth()
+              .signOut()
+              .then(
+                () => {
+                  this.props.navigation.navigate("Login");
+                },
+                function(error) {
+                  // An error happened.
+                }
+              );
+          }}
+        >
+          Log out
+        </Button>
       </View>
     );
   }
