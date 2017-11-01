@@ -2,7 +2,7 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
+[![RnFireChat demo](https://i.imgur.com/i3bmKFQ.gif)](https://youtu.be/-sweQ2HzjrA)
 
 **Note:**
 
@@ -15,7 +15,7 @@
 Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
-$ cd RN-login-register-screen
+$ cd RN-firechat
 $ git checkout signInUp
 ```
 
@@ -58,7 +58,7 @@ Follow Code.txt and Working.png
  - Using onAuthChange navigate to Boiler 
  - For autologin, use onauth and if user is found navigate to boiler else go to Login.js
 
-![Working demo]()
+![Working demo](https://i.imgur.com/F7mmaJN.png)
 
 ## Contributing
 
