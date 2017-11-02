@@ -4,7 +4,7 @@
 
 In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/signInUp" target="_blank">SignInUp</a> branch where we will be working to entering a chatroom.
 
-[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
+[![RnFireChat demo](https://i.imgur.com/1b76j3e.gif)](https://youtu.be/-sweQ2HzjrA)
 
 **Note:**
 
@@ -59,7 +59,7 @@ Follow Code.txt and Working.png
  - InputField to enter username if the user wants to be anynomous to the system and then navigate to GloChat.js
  - Setup Backend.js to make database as 'messages' with loading of previos mesages from server and gifted chat to show to the user for message input
 
-![Working demo]()
+![Working demo](https://i.imgur.com/2hUuqbL.png)
 
 ## Contributing
 
