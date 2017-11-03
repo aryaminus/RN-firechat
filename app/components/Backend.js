@@ -1,8 +1,22 @@
 import firebase from "react-native-firebase";
+
 class Backend {
   uid = "";
   messagesRef = null;
-  
+  constructor() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setUid(user.uid);
+      } else {
+        firebase
+          .auth()
+          .signInAnonymously()
+          .catch(error => {
+            alert(error.message);
+          });
+      }
+    });
+  }
   setUid(value) {
     this.uid = value;
   }
