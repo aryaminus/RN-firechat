@@ -17,6 +17,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import md5 from "./md5";
 import Chat from "./Chat";
 
+var name, uid, email;
+
 export default class FriendsList extends Component {
   constructor(props) {
     super(props);
@@ -65,17 +67,32 @@ export default class FriendsList extends Component {
       elevation: null
     }
   };
-
+  idpress() {
+    console.log(name);
+    this.props.navigation.navigate("Chat", {
+      name,
+      email,
+      uid
+    });
+  }
   renderRow = rowData => {
     return (
       <TouchableOpacity
-        onPress={props =>
-          this.props.navigation.navigate("Chat", { friend: rowData })}
+        onPress={props => {
+          //console.log(rowData);
+          //this.setState({friend: rowData});
+          name = rowData.name;
+          email = rowData.email;
+          uid= rowData.uid;
+          //this.setState({ name: friend.name });
+          console.log(uid);
+          this.idpress();
+        }}
       >
         <View style={styles.profileContainer}>
           <Image
             source={{
-              uri: "https://www.gravatar.com/avatar/" + md5(rowData.email)
+              uri: "https://www.gravatar.com/avatar/" //+ md5(rowData.email)
             }}
             style={styles.profileImage}
           />
