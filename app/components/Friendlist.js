@@ -20,6 +20,11 @@ import Chat from "./Chat";
 var name, uid, email;
 
 export default class FriendsList extends Component {
+  state = {
+    name: "",
+    uid: "",
+    email: ""
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -67,26 +72,20 @@ export default class FriendsList extends Component {
       elevation: null
     }
   };
-  idpress() {
-    console.log(name);
-    this.props.navigation.navigate("Chat", {
-      name,
-      email,
-      uid
-    });
-  }
+
   renderRow = rowData => {
+
     return (
       <TouchableOpacity
-        onPress={props => {
-          //console.log(rowData);
-          //this.setState({friend: rowData});
+        onPress={() => {
           name = rowData.name;
           email = rowData.email;
-          uid= rowData.uid;
-          //this.setState({ name: friend.name });
-          console.log(uid);
-          this.idpress();
+          uid = rowData.uid;
+          this.props.navigation.navigate("Chat", {
+            name: name,
+            email: email,
+            uid: uid
+          });
         }}
       >
         <View style={styles.profileContainer}>

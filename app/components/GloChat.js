@@ -35,7 +35,7 @@ class GloChat extends React.Component {
           }}
           user={{
             _id: Backend.getUid(),
-            name: this.props.name
+            name: this.props.navigation.state.name
           }}
         />
       </View>

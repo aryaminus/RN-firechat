@@ -23,8 +23,11 @@ export default class Chat extends Component {
     };
 
     this.user = firebase.auth().currentUser;
-    console.log(this.props.uid);
-    //this.friend = this.props.friend;
+
+    const { params } = this.props.navigation.state;
+    this.props.uid = params.uid;
+    this.props.name = params.name;
+    this.props.email = params.email;
 
     this.chatRef = this.getRef().child("chat/" + this.generateChatId());
     this.chatRefData = this.chatRef.orderByChild("order");
@@ -95,6 +98,7 @@ export default class Chat extends Component {
     });
   }
   render() {
+    
     return (
       <GiftedChat
         messages={this.state.messages}
