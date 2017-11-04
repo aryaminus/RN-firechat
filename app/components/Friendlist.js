@@ -22,7 +22,7 @@ var name, uid, email;
 export default class FriendsList extends Component {
   state = {
     name: "",
-    uid: "",
+    uid: null,
     email: ""
   };
   constructor(props) {

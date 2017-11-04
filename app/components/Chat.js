@@ -15,6 +15,8 @@ import firebase from "react-native-firebase";
 
 import md5 from "./md5";
 
+var name, uid, email;
+
 export default class Chat extends Component {
   constructor(props) {
     super(props);
@@ -23,11 +25,13 @@ export default class Chat extends Component {
     };
 
     this.user = firebase.auth().currentUser;
-
+    console.log("User:" + this.user.uid);
+    
     const { params } = this.props.navigation.state;
-    this.props.uid = params.uid;
-    this.props.name = params.name;
-    this.props.email = params.email;
+    uid = params.uid;
+    name = params.name;
+    email = params.email;
+    console.log("User:" + uid);
 
     this.chatRef = this.getRef().child("chat/" + this.generateChatId());
     this.chatRefData = this.chatRef.orderByChild("order");
@@ -35,9 +39,8 @@ export default class Chat extends Component {
   }
 
   generateChatId() {
-    if (this.user.uid > this.props.uid)
-      return `${this.user.uid}-${this.props.uid}`;
-    else return `${this.props.uid}-${this.user.uid}`;
+    if (this.user.uid > uid) return `${this.user.uid}-${uid}`;
+    else return `${uid}-${this.user.uid}`;
   }
 
   getRef() {
@@ -49,13 +52,12 @@ export default class Chat extends Component {
       // get children as an array
       var items = [];
       snap.forEach(child => {
-        var avatar = "https://www.gravatar.com/avatar/";
-        /*+
+        var avatar =
+          "https://www.gravatar.com/avatar/" +
           (child.val().uid == this.user.uid
             ? md5(this.user.email)
-            : md5(this.props.email))*/
-        var name =
-          child.val().uid == this.user.uid ? this.user.name : this.props.name;
+            : md5(this.props.email));
+        var name = child.val().uid == this.user.uid ? this.user.name : name;
         items.push({
           _id: child.val().createdAt,
           text: child.val().text,
