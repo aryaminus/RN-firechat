@@ -33,7 +33,7 @@ export default class Chat extends Component {
     email = params.email;
     console.log("User:" + uid);
 
-    this.chatRef = this.getRef().child("chat/" + this.generateChatId());
+    this.chatRef = this.getRef().child("chat/" + `${uid}`);
     this.chatRefData = this.chatRef.orderByChild("order");
     this.onSend = this.onSend.bind(this);
   }
