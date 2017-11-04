@@ -36,7 +36,7 @@ export default class Register extends Component {
             uid: user.uid,
             name: this.state.name
           });
-        this.props.navigation.navigate("Boiler");
+        //this.props.navigation.navigate("Boiler");
         this.setState({
           loading: false
         });

@@ -70,11 +70,32 @@ export default class FriendsList extends Component {
     headerStyle: {
       backgroundColor: "#16a085",
       elevation: null
-    }
+    },
+    headerRight: (
+      <Button
+        primary
+        title="Logout"
+        //style={styles.rightButton}
+        onPress={() => {
+          firebase
+            .auth()
+            .signOut()
+            .then(
+              () => {
+                //done
+              },
+              function(error) {
+                // An error happened.
+              }
+            );
+        }}
+      >
+        Log out
+      </Button>
+    )
   };
 
   renderRow = rowData => {
-
     return (
       <TouchableOpacity
         onPress={() => {
