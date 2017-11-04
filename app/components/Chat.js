@@ -49,11 +49,11 @@ export default class Chat extends Component {
       // get children as an array
       var items = [];
       snap.forEach(child => {
-        var avatar =
-          "https://www.gravatar.com/avatar/" +
+        var avatar = "https://www.gravatar.com/avatar/";
+        /*+
           (child.val().uid == this.user.uid
             ? md5(this.user.email)
-            : md5(this.props.email));
+            : md5(this.props.email))*/
         var name =
           child.val().uid == this.user.uid ? this.user.name : this.props.name;
         items.push({
@@ -98,7 +98,6 @@ export default class Chat extends Component {
     });
   }
   render() {
-    
     return (
       <GiftedChat
         messages={this.state.messages}
