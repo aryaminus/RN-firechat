@@ -26,14 +26,14 @@ export default class Chat extends Component {
 
     this.user = firebase.auth().currentUser;
     console.log("User:" + this.user.uid);
-    
+
     const { params } = this.props.navigation.state;
     uid = params.uid;
     name = params.name;
     email = params.email;
     console.log("User:" + uid);
 
-    this.chatRef = this.getRef().child("chat/" + `${uid}`);
+    this.chatRef = this.getRef().child("chat/" + this.generateChatId());
     this.chatRefData = this.chatRef.orderByChild("order");
     this.onSend = this.onSend.bind(this);
   }
@@ -56,7 +56,7 @@ export default class Chat extends Component {
           "https://www.gravatar.com/avatar/" +
           (child.val().uid == this.user.uid
             ? md5(this.user.email)
-            : md5(this.props.email));
+            : md5(email));
         var name = child.val().uid == this.user.uid ? this.user.name : name;
         items.push({
           _id: child.val().createdAt,
