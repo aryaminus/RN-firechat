@@ -156,3 +156,7 @@ android/app/src/main/AndroidManifest.xml:
       <category android:name="android.intent.category.DEFAULT" />
     </intent-filter>
   </receiver>
+
+
+Generating Signed APK :
+https://facebook.github.io/react-native/docs/signed-apk-android.html
