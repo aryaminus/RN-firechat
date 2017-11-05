@@ -52,19 +52,14 @@ export default class Chat extends Component {
       // get children as an array
       var items = [];
       snap.forEach(child => {
-        var avatar =
-          "https://www.gravatar.com/avatar/" +
-          (child.val().uid == this.user.uid
-            ? md5(this.user.email)
-            : md5(email));
-        var name = child.val().uid == this.user.uid ? this.user.name : name;
+        //var name = child.val().uid == this.user.uid ? this.user.name : name1;
         items.push({
           _id: child.val().createdAt,
           text: child.val().text,
           createdAt: new Date(child.val().createdAt),
           user: {
-            _id: child.val().uid,
-            avatar: avatar
+            _id: child.val().uid
+            //avatar: avatar
           }
         });
       });
@@ -89,6 +84,7 @@ export default class Chat extends Component {
     //     messages: GiftedChat.append(this.state.messages, messages),
     // });
     messages.forEach(message => {
+      var message = message[0];
       var now = new Date().getTime();
       this.chatRef.push({
         _id: now,
