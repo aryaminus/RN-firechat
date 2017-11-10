@@ -2,10 +2,10 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her
+In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her.
 
 
-[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
+[![RnFireChat demo](https://i.imgur.com/Lae3m7R.gif)](https://youtu.be/XNQ1jgqpX3c)
 
 **Note:**
 
@@ -36,7 +36,7 @@ react-native link
 then press F1 or Fn+F1 and React Native:Run Android on Device 
 
 **Else**
-Follow Code.txt and <a href="https://youtu.be/-sweQ2HzjrA" target="_blank">Youtube</a>
+Follow Code.txt and <a href="https://youtu.be/XNQ1jgqpX3c" target="_blank">Youtube</a>
 
 We will be using Signin and Signup screen ie. <a href="https://github.com/aryaminus/RN-login-register-screen" target="_blank"> 3rd session</a>
 
