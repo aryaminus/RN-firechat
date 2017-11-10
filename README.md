@@ -2,9 +2,10 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/signInUp" target="_blank">SignInUp</a> branch where we will be working to entering a chatroom.
+In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her
 
-[![RnFireChat demo](https://i.imgur.com/1b76j3e.gif)](https://youtu.be/-sweQ2HzjrA)
+
+[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
 
 **Note:**
 
@@ -18,7 +19,7 @@ Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
 $ cd RN-firechat
-$ git checkout GloChat
+$ git PersonalChat
 ```
 
 **Start the application in development mode**
@@ -45,6 +46,7 @@ We will be using Signin and Signup screen ie. <a href="https://github.com/aryami
 3. <a href="https://github.com/invertase/react-native-firebase/" target="_blank">react-native-firebase</a>
 4. <a href="https://github.com/FaridSafi/react-native-gifted-chat" target="_blank">react-native-gifted-chat</a>
 5. <a href="https://rnfirebase.io/docs/v3.0.*/installation/initial-setup" target="_blank">Invertase Firebase initial setup</a>
+6. <a href="https://github.com/drmas/FireChat" target="_blank">Original drmas Layout Repo</a>
 
 ## Additional Links:
 There is an update put up by <a href="https://rnfirebase.io/" target="_blank">invertase</a> for a <a href="https://github.com/invertase/react-native-firebase-starter" target="_blank">react-native-firebase-starter</a> pre-integrated so you can get started quickly.
@@ -54,12 +56,12 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of SignInUp branch
+ - Use the template of GloChat branch
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
- - InputField to enter username if the user wants to be anynomous to the system and then navigate to GloChat.js
- - Setup Backend.js to make database as 'messages' with loading of previos mesages from server and gifted chat to show to the user for message input
+ - If choose Friendlist.js show a vertical ListView of users linked in 'friends' with geeting progile pic from gavatar
+ - When certain user is clicked, send the rowdata value ie receiver ID and genetare certain Chat ID with user and Friend ID and iside the databse of chatID, show the Gifted Chat to send and receive text
 
-![Working demo](https://i.imgur.com/2hUuqbL.png)
+![Working demo](https://i.imgur.com/nxpAU2j.png)
 
 ## Contributing
 
