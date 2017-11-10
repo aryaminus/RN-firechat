@@ -2,10 +2,9 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her
+In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/signInUp" target="_blank">SignInUp</a> branch where we will be working to entering a chatroom.
 
-
-[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
+[![RnFireChat demo](https://i.imgur.com/1b76j3e.gif)](https://youtu.be/-sweQ2HzjrA)
 
 **Note:**
 
@@ -19,7 +18,7 @@ Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
 $ cd RN-firechat
-$ git PersonalChat
+$ git checkout GloChat
 ```
 
 **Start the application in development mode**
@@ -55,12 +54,12 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of GloChat branch
+ - Use the template of SignInUp branch
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
- - If choose Friendlist.js show a vertical ListView of users linked in 'friends' with geeting progile pic from gavatar
- - When certain user is clicked, send the rowdata value ie receiver ID and genetare certain Chat ID with user and Friend ID and iside the databse of chatID, show the Gifted Chat to send and receive text
+ - InputField to enter username if the user wants to be anynomous to the system and then navigate to GloChat.js
+ - Setup Backend.js to make database as 'messages' with loading of previos mesages from server and gifted chat to show to the user for message input
 
-![Working demo]()
+![Working demo](https://i.imgur.com/2hUuqbL.png)
 
 ## Contributing
 
@@ -69,5 +68,3 @@ Follow Code.txt and Working.png
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
-
-
