@@ -36,6 +36,9 @@ export default class Chat extends Component {
     this.onSend = this.onSend.bind(this);
   }
 
+  //generate ChatId works cause when you are the user sending chat you take user.uid and your friend takes uid
+  // when your friend is using the app to send message s/he takes user.uid and you take the uid cause you are the friend 
+
   generateChatId() {
     if (this.user.uid > uid) return `${this.user.uid}-${uid}`;
     else return `${uid}-${this.user.uid}`;
