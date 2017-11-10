@@ -27,7 +27,7 @@ export default class Login extends Component {
     };
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        //this.props.navigation.navigate("Boiler");
+        this.props.navigation.navigate("Boiler");
         this.setState({
           loading: false
         });

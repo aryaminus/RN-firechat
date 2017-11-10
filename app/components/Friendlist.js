@@ -14,7 +14,6 @@ import { StackNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 
-import md5 from "./md5";
 import Chat from "./Chat";
 
 var name, uid, email;
@@ -75,14 +74,13 @@ export default class FriendsList extends Component {
       <Button
         primary
         title="Logout"
-        //style={styles.rightButton}
         onPress={() => {
           firebase
             .auth()
             .signOut()
             .then(
               () => {
-                //done
+                this.props.navigation.navigate("Login");
               },
               function(error) {
                 // An error happened.
@@ -112,7 +110,7 @@ export default class FriendsList extends Component {
         <View style={styles.profileContainer}>
           <Image
             source={{
-              uri: "https://www.gravatar.com/avatar/" //+ md5(rowData.email)
+              uri: "https://www.gravatar.com/avatar/"
             }}
             style={styles.profileImage}
           />

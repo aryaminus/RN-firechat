@@ -13,8 +13,6 @@ import { StackNavigator } from "react-navigation";
 import { GiftedChat } from "react-native-gifted-chat";
 import firebase from "react-native-firebase";
 
-import md5 from "./md5";
-
 var name, uid, email;
 
 export default class Chat extends Component {
@@ -84,7 +82,7 @@ export default class Chat extends Component {
     //     messages: GiftedChat.append(this.state.messages, messages),
     // });
     messages.forEach(message => {
-      var message = message[0];
+      //var message = message[0];
       var now = new Date().getTime();
       this.chatRef.push({
         _id: now,
