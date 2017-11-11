@@ -23,10 +23,18 @@ export default class Register extends Component {
       email: "",
       name: "",
       password: "",
+      token: "",
       password_confirmation: "",
       errorMessage: null,
       loading: false
     };
+    firebase
+      .messaging()
+      .getToken()
+      .then(token => {
+        console.warn("Device firebase Token: ", token);
+        this.setState((token = token));
+      });
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.getRef()
@@ -34,7 +42,8 @@ export default class Register extends Component {
           .push({
             email: user.email,
             uid: user.uid,
-            name: this.state.name
+            name: this.state.name,
+            token: this.state.token
           });
         this.props.navigation.navigate("Boiler");
         this.setState({
