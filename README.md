@@ -2,10 +2,20 @@
 
 **RnFireChat** is the 5th session build for showing the implementation of Firebase for building a Chat app; both Chat Room and p2p along with serverless function for push notification.
 
-In this branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/GloChat" target="_blank">GloChat</a> branch where we will be working to entering either a chatroom or to choose a person from FriendList and chat with him/her
+[![RnFireChat demo](https://i.imgur.com/Lae3m7R.gif)](https://youtu.be/XNQ1jgqpX3c)
 
+In this master branch, we'll be using the built layout from <a href="https://github.com/aryaminus/RN-firechat/tree/PersonalChat" target="_blank">PersonalChat</a> branch where we will be working to building push notification using <a href="https://firebase.google.com/docs/functions/" target="_blank">Firebase Cloud Functions</a> using my other repository:
 
-[![RnFireChat demo](https://i.imgur.com/vgep2fb.gif)]()
+<a href="https://github.com/aryaminus/RN-firechat-functions" target="_blank">RN-firechat-functions</a>
+
+Also, we will be working on generating release apk so that it can be used within diferent devices.
+
+## Todos
+
+- [ ] Configuring firebase-messaging to subscribe to particular 1 to 1 chat
+- [ ] Making the UI of Boiler.js more enhanced and material
+- [ ] Adding file exchange i.e sending and receiving files between the user
+- [ ] Adding avatar to the user profile
 
 **Note:**
 
@@ -19,7 +29,6 @@ Clone the source locally:
 ```
 $ git clone https://github.com/aryaminus/RN-firechat
 $ cd RN-firechat
-$ git PersonalChat
 ```
 
 **Start the application in development mode**
@@ -46,6 +55,7 @@ We will be using Signin and Signup screen ie. <a href="https://github.com/aryami
 3. <a href="https://github.com/invertase/react-native-firebase/" target="_blank">react-native-firebase</a>
 4. <a href="https://github.com/FaridSafi/react-native-gifted-chat" target="_blank">react-native-gifted-chat</a>
 5. <a href="https://rnfirebase.io/docs/v3.0.*/installation/initial-setup" target="_blank">Invertase Firebase initial setup</a>
+6. <a href="https://github.com/drmas/FireChat" target="_blank">Original drmas Friendlist layout</a>
 
 ## Additional Links:
 There is an update put up by <a href="https://rnfirebase.io/" target="_blank">invertase</a> for a <a href="https://github.com/invertase/react-native-firebase-starter" target="_blank">react-native-firebase-starter</a> pre-integrated so you can get started quickly.
@@ -55,12 +65,13 @@ There is an update put up by <a href="https://rnfirebase.io/" target="_blank">in
 Follow Code.txt and Working.png
 
 **Major Properties:**
- - Use the template of GloChat branch
+ - Use the template of GloChat branch for anon login and geting inside Global ChatRoom
  - Usage of invertase firebase instead of original firebase package as it is built for web but therefore Firebase will run on the native thread for invertase
+ - Request permission is needed for new newer devices both android and ios and subscribe and unsubscribe will just look in the child database in firebase to fetch push notification from cloud server
  - If choose Friendlist.js show a vertical ListView of users linked in 'friends' with geeting progile pic from gavatar
  - When certain user is clicked, send the rowdata value ie receiver ID and genetare certain Chat ID with user and Friend ID and iside the databse of chatID, show the Gifted Chat to send and receive text
 
-![Working demo]()
+![Working demo](https://i.imgur.com/nxpAU2j.png)
 
 ## Contributing
 
