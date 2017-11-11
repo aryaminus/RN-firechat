@@ -92,6 +92,7 @@ export default class Chat extends Component {
         text: message.text,
         createdAt: now,
         uid: this.user.uid,
+        fuid: uid,
         order: -1 * now
       });
     });
