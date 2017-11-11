@@ -56,6 +56,7 @@ We will be using Signin and Signup screen ie. <a href="https://github.com/aryami
 4. <a href="https://github.com/FaridSafi/react-native-gifted-chat" target="_blank">react-native-gifted-chat</a>
 5. <a href="https://rnfirebase.io/docs/v3.0.*/installation/initial-setup" target="_blank">Invertase Firebase initial setup</a>
 6. <a href="https://github.com/drmas/FireChat" target="_blank">Original drmas Friendlist layout</a>
+7. <a href="https://facebook.github.io/react-native/docs/signed-apk-android.html" target="_blank">Generate Signed APK</a>
 
 ## Additional Links:
 There is an update put up by <a href="https://rnfirebase.io/" target="_blank">invertase</a> for a <a href="https://github.com/invertase/react-native-firebase-starter" target="_blank">react-native-firebase-starter</a> pre-integrated so you can get started quickly.
