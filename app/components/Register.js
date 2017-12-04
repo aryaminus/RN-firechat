@@ -26,7 +26,8 @@ export default class Register extends Component {
       token: "",
       password_confirmation: "",
       errorMessage: null,
-      loading: false
+      loading: false,
+      uid: ""
     };
     firebase
       .messaging()
@@ -35,7 +36,7 @@ export default class Register extends Component {
         console.warn("Device firebase Token: ", token);
         this.setState((token = token));
       });
-    firebase.auth().onAuthStateChanged(user => {
+    /*firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.getRef()
           .child("friends")
@@ -50,7 +51,7 @@ export default class Register extends Component {
           loading: false
         });
       }
-    });
+    });*/
   }
 
   getRef() {
@@ -66,7 +67,7 @@ export default class Register extends Component {
 
   async onRegisterPress() {
     this.setState({ errorMessage: null, loading: true });
-    const { email, password, name } = this.state;
+    const { email, password, name, uid } = this.state;
     console.log(email);
     console.log(name);
     console.log(password);
@@ -86,7 +87,24 @@ export default class Register extends Component {
     await AsyncStorage.setItem("email", email);
     await AsyncStorage.setItem("name", name);
     await AsyncStorage.setItem("password", password);
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        uid: user.uid;
+      }
+    });
+    this.getRef()
+      .child("friends")
+      .push({
+        email: email,
+        uid: uid,
+        name: name,
+        token: this.state.token
+      });
     this.props.navigation.navigate("Boiler");
+    this.setState({
+      loading: false
+    });
+    //this.props.navigation.navigate("Boiler");
   }
 
   renderErrorMessage = () => {
@@ -140,7 +158,8 @@ export default class Register extends Component {
           <TextInput
             value={this.state.password}
             onChangeText={password_confirmation =>
-              this.setState({ password_confirmation })}
+              this.setState({ password_confirmation })
+            }
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
