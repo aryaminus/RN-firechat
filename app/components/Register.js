@@ -29,27 +29,12 @@ export default class Register extends Component {
       loading: false,
       uid: ""
     };
-    firebase
-      .messaging()
-      .getToken()
-      .then(token => {
-        console.warn("Device firebase Token: ", token);
-        this.setState((token = token));
-      });
     /*firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.getRef()
-          .child("friends")
-          .push({
-            email: user.email,
-            uid: user.uid,
-            name: this.state.name,
-            token: this.state.token
-          });
-        this.props.navigation.navigate("Boiler");
         this.setState({
           loading: false
         });
+        this.props.navigation.navigate("Boiler");
       }
     });*/
   }
@@ -87,11 +72,21 @@ export default class Register extends Component {
     await AsyncStorage.setItem("email", email);
     await AsyncStorage.setItem("name", name);
     await AsyncStorage.setItem("password", password);
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         uid: user.uid;
       }
     });
+    
+    firebase
+    .messaging()
+    .getToken()
+    .then(token => {
+      console.warn("Device firebase Token: ", token);
+      this.setState((token = token));
+    });
+
     this.getRef()
       .child("friends")
       .push({
@@ -100,11 +95,12 @@ export default class Register extends Component {
         name: name,
         token: this.state.token
       });
-    this.props.navigation.navigate("Boiler");
+
+    //this.props.navigation.navigate("Boiler");
     this.setState({
       loading: false
     });
-    //this.props.navigation.navigate("Boiler");
+    this.props.navigation.navigate("Boiler");
   }
 
   renderErrorMessage = () => {

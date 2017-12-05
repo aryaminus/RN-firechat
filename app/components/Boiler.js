@@ -67,7 +67,7 @@ export default class Boiler extends Component {
               .signOut()
               .then(
                 () => {
-                  this.props.navigation.navigate("Login");
+                  //this.props.navigation.navigate("Login");
                 },
                 function(error) {
                   // An error happened.
