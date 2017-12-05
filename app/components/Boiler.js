@@ -44,7 +44,8 @@ export default class Boiler extends Component {
             onPress={() =>
               this.props.navigation.navigate("GloChat", {
                 name: this.state.name
-              })}
+              })
+            }
           >
             Chat Room
           </Text>
@@ -67,12 +68,17 @@ export default class Boiler extends Component {
               .signOut()
               .then(
                 () => {
-                  this.props.navigation.navigate("Login");
+                  firebase.auth().onAuthStateChanged(user => {
+                    if (user) {
+                      firebase.auth().signOut();
+                    }
+                  });
                 },
                 function(error) {
                   // An error happened.
                 }
               );
+            this.props.navigation.navigate("Login");
           }}
         >
           Log out
