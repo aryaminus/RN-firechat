@@ -16,6 +16,8 @@ import { StackNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 
+var Token;
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -23,20 +25,17 @@ export default class Register extends Component {
       email: "",
       name: "",
       password: "",
-      token: "",
       password_confirmation: "",
       errorMessage: null,
-      loading: false,
-      uid: ""
+      loading: false
     };
-    /*firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          loading: false
-        });
-        this.props.navigation.navigate("Boiler");
-      }
-    });*/
+    firebase
+      .messaging()
+      .getToken()
+      .then(token => {
+        console.warn("Device firebase Token: ", token);
+        Token = token;
+      });
   }
 
   getRef() {
@@ -52,7 +51,7 @@ export default class Register extends Component {
 
   async onRegisterPress() {
     this.setState({ errorMessage: null, loading: true });
-    const { email, password, name, uid } = this.state;
+    const { email, password, name } = this.state;
     console.log(email);
     console.log(name);
     console.log(password);
@@ -75,32 +74,21 @@ export default class Register extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        uid: user.uid;
+        console.log(user.uid, user.email);
+        this.getRef()
+          .child("friends")
+          .push({
+            email: email,
+            uid: user.uid,
+            name: this.state.name,
+            token: Token
+          });
+        this.props.navigation.navigate("Boiler");
+        this.setState({
+          loading: false
+        });
       }
     });
-    
-    firebase
-    .messaging()
-    .getToken()
-    .then(token => {
-      console.warn("Device firebase Token: ", token);
-      this.setState((token = token));
-    });
-
-    this.getRef()
-      .child("friends")
-      .push({
-        email: email,
-        uid: uid,
-        name: name,
-        token: this.state.token
-      });
-
-    //this.props.navigation.navigate("Boiler");
-    this.setState({
-      loading: false
-    });
-    this.props.navigation.navigate("Boiler");
   }
 
   renderErrorMessage = () => {
