@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   myFriends: {
     flex: 1,
     color: "#3A5BB1",
-    tintColor: "#fff",
+    //tintColor: "#fff",
     //secondaryColor: '#E9E9E9',
     //grayColor: '#A5A5A5',
     fontSize: 16,
